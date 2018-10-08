@@ -2,7 +2,7 @@ import urllib.request
 import json
 
 
-def get_weather(location = "london"):
+def get_weather(location):
     # Get woeid by making a call to /api/location/search
     link = "https://www.metaweather.com/api/location/search/?query=" + location
     url = urllib.request.urlopen(link)
@@ -17,9 +17,9 @@ def get_weather(location = "london"):
     response = url.read().decode("utf8")
     json_data = json.loads(response)
     consolidated_weather = json_data["consolidated_weather"]
-    
-    print(json_data["sun_rise"])
-    print(json_data["parent"]["title"])
-    print(json_data["consolidated_weather"][0]["max_temp"])
+
+    for data in consolidated_weather:
+        print(data)
+        print()
 
 get_weather("lagos")
